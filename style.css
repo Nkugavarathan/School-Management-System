@@ -1,0 +1,375 @@
+<style>
+       
+		body {
+			margin:0;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    text-align: center;
+  }
+
+        header {
+            background: #333;
+            color: white;
+            padding: 10px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header .logo {
+            display: flex;
+            align-items: center;
+        }
+        header .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        nav a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .main-container {
+            display: flex;
+            min-height: 80vh;
+        }
+        .left-column {
+             flex: 0 0 60%;
+            background: #f4f4f4;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            text-align: center;
+        }
+		.left-column h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        .left-column p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .left-column img {
+            max-width: 100%;
+            height: 80%;
+            border-radius: 10px;
+            box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+        }
+        .right-column {
+            flex: 0 0 40%;
+            background: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 20px;
+        }
+		.roles {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 0  40 px;
+        }
+        .role-box {
+            background: white;
+            width: 250px;
+            padding: 20px;
+            margin: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .role-box h3 {
+            margin: 10px 0;
+        }
+		.login-card {
+            background: pink;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 30px;
+            max-width: 320px;
+            margin: auto;
+        }
+        .login-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 300px;
+            margin: auto;
+        }
+        .login-buttons .btn {
+            width: 100%;
+            padding: 15px;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            margin: 8px 0;
+            text-align: center;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+        .login-buttons .btn:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+        }
+        
+		
+		 .role-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 10px;
+            border-radius: 5px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .principal { background: purple; }
+        .student { background: green; }
+        .parent { background: crimson; }
+		.staff { background: blue; }
+		.teacher { background: red; }
+        footer {
+            background: #222;
+            color: #ccc;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        footer div {
+            margin: 10px;
+        }
+        footer a {
+            color: #ccc;
+            text-decoration: none;
+        }
+		/* Responsive adjustments */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+            .left-column, .right-column {
+                flex: 0 0 100%;
+                padding: 20px;
+            }
+            .left-column img {
+                max-width: 100%;
+            }
+        }
+		 .moving-text-container {
+        overflow: hidden;
+        background: #cccc;
+        padding: 20px 0;
+    }
+    .moving-text {
+        display: inline-block;
+        white-space: nowrap;
+        animation: moveText 15s linear infinite;
+        color: black;
+        font-size: 28px;
+        font-weight: bold;
+    }
+    @keyframes moveText {
+        from { transform: translateX(100%); }
+        to { transform: translateX(-100%); }
+    }
+	
+	.review-slider {
+    position: relative;
+    height: 150px; /* Enough space for one review */
+    overflow: hidden;
+}
+
+.review-slider p {
+    position: absolute;
+    width: 100%;
+    margin: 0;
+    padding: 5px 0;
+    text-align: left;
+    color: red;
+    font-size: 16px;
+    opacity: 0;
+    animation: fadeReviews 16s infinite;
+}
+
+/* Show each review at a different time */
+.review-slider p:nth-child(1) { animation-delay: 0s; }
+.review-slider p:nth-child(2) { animation-delay: 4s; }
+.review-slider p:nth-child(3) { animation-delay: 8s; }
+.review-slider p:nth-child(4) { animation-delay: 12s; }
+
+@keyframes fadeReviews {
+    0%, 20%   { opacity: 1; }
+    25%, 100% { opacity: 0; }
+	
+}
+
+footer .social-icons img {
+    width: 30px;      /* Icon width */
+    height: 30px;     /* Icon height */
+    object-fit: contain; /* Keeps aspect ratio inside size */
+    margin: 5px;      /* Space between icons */
+    transition: transform 0.2s ease-in-out; /* Smooth hover effect */
+}
+
+footer .social-icons img:hover {
+    transform: scale(1.2); /* Slight zoom when hovering */
+}
+
+
+
+  
+  h2 {
+    font-weight: bold;
+    font-size: 2em;
+  }
+
+  p.subtitle {
+    margin: 8px 0 40px 0;
+    font-size: 0.9em;
+  }
+
+  .features-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  .feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .feature-icon {
+    width: 40px;
+    height: 40px;
+    opacity: 0.7;
+  }
+
+  .feature-content {
+    flex: 1;
+  }
+
+  .feature-title {
+    color: #0099ff;
+    font-weight: bold;
+    font-size: 1.1em;
+    margin: 0 0 6px 0;
+  }
+
+  .feature-description {
+    font-size: 0.9em;
+    color: #111;
+    margin: 0;
+  }
+
+  /* Responsive */
+  @media (max-width: 700px) {
+    .features-container {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .feature-item {
+      text-align: center;
+      flex-direction: column;
+      align-items: center;
+    }
+    .feature-content {
+      text-align: center;
+    }
+  }
+  
+  
+
+    /* Basic reset */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .login-container {
+      background: white;
+      padding: 40px 30px;
+      border-radius: 10px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      width: 320px;
+      text-align: center;
+    }
+
+    .login-container h2 {
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #555;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1.8px solid #ddd;
+      border-radius: 6px;
+      font-size: 16px;
+      transition: border-color 0.3s ease;
+    }
+
+    input[type="email"]:focus,
+    input[type="password"]:focus {
+      outline: none;
+      border-color: #2575fc;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #2575fc;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #1a54d6;
+    }
+
+    .forgot-password {
+      margin-top: 15px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .forgot-password a {
+      color: #2575fc;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .forgot-password a:hover {
+      text-decoration: underline;
+    }
+  </style>
+
+
+ 
