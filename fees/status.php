@@ -1,6 +1,6 @@
 <?php
 include("../config.php");
-session_start();
+// session_start();
 
 // For students/parents, auto-set their student_id from session
 // For now, allow Admin/Teacher to search manually

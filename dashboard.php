@@ -103,7 +103,7 @@ $role = $_SESSION['role'];
                 <div class="card p-3 shadow">
                     <h5>Notice Board</h5>
                     <a href="notices/add.php" class="btn btn-primary mt-2">Post Notice</a>
-                    <a href="notices/list.php" class="btn btn-info mt-2">View Notices</a>
+                    <a href="notices/view.php" class="btn btn-info mt-2">View Notices</a>
                 </div>
             </div>
         <?php } ?>
@@ -136,7 +136,7 @@ $role = $_SESSION['role'];
                 <div class="card p-3 shadow">
                     <h5>Notice Board</h5>
                     <a href="notices/add.php" class="btn btn-primary mt-2">Post Notice</a>
-                    <a href="notices/list.php" class="btn btn-info mt-2">View Notices</a>
+                    <a href="notices/view.php" class="btn btn-info mt-2">View Notices</a>
                 </div>
             </div>
         <?php } ?>
@@ -174,7 +174,7 @@ $role = $_SESSION['role'];
             <div class="col-md-4">
                 <div class="card p-3 shadow">
                     <h5>Notice Board</h5>
-                    <a href="notices/list.php" class="btn btn-info mt-2">View Notices</a>
+                    <a href="notices/view.php" class="btn btn-info mt-2">View Notices</a>
                 </div>
             </div>
         <?php } ?>

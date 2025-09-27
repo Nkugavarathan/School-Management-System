@@ -1,6 +1,6 @@
 <?php
 include("../config.php");
-session_start();
+// session_start();
 
 $sql = "SELECT p.payment_id, s.name, p.amount, p.payment_date, p.receipt_no 
         FROM payments p 
@@ -18,7 +18,7 @@ echo "<table border='1'>
         </tr>";
 
 while ($row = $result->fetch_assoc()) {
-    echo "<tr>
+        echo "<tr>
             <td>{$row['receipt_no']}</td>
             <td>{$row['name']}</td>
             <td>{$row['amount']}</td>
