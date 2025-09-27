@@ -53,7 +53,12 @@ if (isset($_POST['login'])) {
                 }
             }
 
-            header("Location: dashboard.php");
+            if ($row['role'] == "admin") {
+                header("Location: admin_dashboard.php");
+            } else {
+                header("Location: dashboard.php");
+            }
+            exit();
             exit();
         } else {
             echo "<div class='alert alert-danger text-center mt-3'>Invalid password!</div>";

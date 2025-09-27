@@ -53,6 +53,9 @@ $role = $_SESSION['role'];
 <body class="container py-5">
 
     <div class="d-flex justify-content-between align-items-center mb-4">
+        <?php if ($role == "admin") { ?>
+            <a href="admin_dashboard.php" class="btn btn-outline-primary me-2">Back to Admin Dashboard</a>
+        <?php } ?>
         <h2>Welcome, <span class="text-primary"><?= ucfirst($role) ?></span>!</h2>
         <a href="logout.php" class="btn btn-danger">Logout</a>
     </div>

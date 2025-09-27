@@ -22,7 +22,7 @@ $row = $result->fetch_assoc();
 $totalTeachers = $row['total'] ?? 0;
 
 // ------------------
-// Parent Count (assuming stored in users table with role='parent')
+// Parent Count
 // ------------------
 $result = $conn->query("SELECT COUNT(*) AS total FROM users WHERE role='parent'");
 $row = $result->fetch_assoc();
@@ -37,20 +37,24 @@ $row = $result->fetch_assoc();
 $todayAttendance = $row['total'] ?? 0;
 
 // ------------------
-// Fees Collected (paid only)
+// Fees Collected (from payments table)
 // ------------------
-$result = $conn->query("SELECT SUM(due_amount) AS total FROM fees WHERE status='paid'");
+$result = $conn->query("SELECT SUM(amount) AS total FROM payments");
 $row = $result->fetch_assoc();
 $feesCollected = $row['total'] ?? 0;
 
 // ------------------
-// Fees Due (optional for chart)
+// Fees Due (from fees table)
 // ------------------
 $result = $conn->query("SELECT SUM(due_amount) AS total FROM fees WHERE status='due'");
 $row = $result->fetch_assoc();
 $feesDue = $row['total'] ?? 0;
 
+// Sanitize values
+$feesCollected = $feesCollected ?: 0;
+$feesDue = $feesDue ?: 0;
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -98,9 +102,16 @@ $feesDue = $row['total'] ?? 0;
             <div class="col-md-3">
                 <div class="card shadow p-3 bg-danger text-white text-center">
                     <h5>Fees Collected</h5>
-                    <h2>₹<?= $feesCollected ?></h2>
+                    <h2>₹<?= number_format($feesCollected, 2) ?></h2>
                 </div>
             </div>
+            <div class="col-md-3">
+                <div class="card shadow p-3 bg-primary text-white text-center">
+
+                    <a href="dashboard.php" class="btn btn-light mt-2">Edit details</a>
+                </div>
+            </div>
+
         </div>
 
         <!-- Chart Section -->
@@ -131,6 +142,16 @@ $feesDue = $row['total'] ?? 0;
                     title: {
                         display: true,
                         text: 'Fees Collected vs Due'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '₹' + value;
+                            }
+                        }
                     }
                 }
             }
