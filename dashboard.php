@@ -190,6 +190,17 @@ $role = $_SESSION['role'];
             </div>
         </div>
 
+        <!-- media  -->
+        <div class="col-md-4">
+            <div class="card p-3 shadow">
+                <h5>Media Gallery</h5>
+                <?php if ($role == "admin" || $role == "teacher") { ?>
+                    <a href="media/upload.php" class="btn btn-success mt-2">Upload Media</a>
+                <?php } ?>
+                <a href="media/gallery.php" class="btn btn-info mt-2">View Gallery</a>
+            </div>
+        </div>
+
     </div>
 
 </body>
