@@ -8,7 +8,9 @@
 </head>
 
 <body class="container p-5">
+    <a href="../dashboard.php" class="btn btn-secondary mb-4">Back to Dashboard</a>
     <h2>Attendance Records</h2>
+
     <table class="table table-bordered">
         <tr>
             <th>ID</th>

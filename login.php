@@ -1,21 +1,31 @@
-<?php
-include("config.php");
-?>
+<?php include("config.php"); ?>
 <!DOCTYPE html>
 <html>
 
 <head>
     <title>Login</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
-<body class="container p-5">
-    <h2>Login</h2>
-    <form method="POST">
-        <input type="text" name="username" class="form-control mb-2" placeholder="Username" required>
-        <input type="password" name="password" class="form-control mb-2" placeholder="Password" required>
-        <button class="btn btn-primary" name="login">Login</button>
-    </form>
+<body class="bg-primary d-flex justify-content-center align-items-center vh-100 text-white">
+
+    <div class="card p-4 shadow-lg" style="width: 100%; max-width: 400px;">
+        <a href="index.php" class="btn btn-danger w-100 mb-1">Back to Homepage</a>
+
+        <h2 class="text-center mb-4">Login</h2>
+        <form method="POST">
+            <div class="mb-3">
+                <input type="text" name="username" class="form-control" placeholder="Username" required>
+            </div>
+            <div class="mb-3">
+                <input type="password" name="password" class="form-control" placeholder="Password" required>
+            </div>
+            <button type="submit" name="login" class="btn btn-primary w-100">Login</button>
+        </form>
+        <p class="text-center mt-3 mb-0">
+            Don't have an account? <a href="register.php" class="text-decoration-underline">Register here</a>
+        </p>
+    </div>
 </body>
 
 </html>
@@ -35,19 +45,17 @@ if (isset($_POST['login'])) {
             $_SESSION['user_id'] = $row['user_id'];
             $_SESSION['role']    = $row['role'];
 
-            // ✅ Add this for teacher
             if ($row['role'] == "teacher") {
                 $_SESSION['teacher_id'] = $row['user_id'];
-                // or $row['teacher_id'] if you have a separate column
             }
 
             header("Location: dashboard.php");
             exit();
         } else {
-            echo "<div class='alert alert-danger mt-3'>Invalid password!</div>";
+            echo "<div class='alert alert-danger text-center mt-3'>Invalid password!</div>";
         }
     } else {
-        echo "<div class='alert alert-danger mt-3'>User not found!</div>";
+        echo "<div class='alert alert-danger text-center mt-3'>User not found!</div>";
     }
 }
 ?>

@@ -26,10 +26,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 ?>
 
-<form method="post">
-    <label>Student ID:</label>
-    <input type="number" name="student_id" required><br>
-    <label>Amount:</label>
-    <input type="number" step="0.01" name="amount" required><br>
-    <button type="submit">Pay</button>
-</form>
+<html>
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<div class="col-md-6">
+    <div class="card shadow-lg">
+        <div class="card-header bg-success text-white">Pay Fee</div>
+        <div class="card-body">
+            <form method="post">
+                <div class="mb-3">
+                    <label class="form-label">Student ID</label>
+                    <input type="number" name="student_id" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Amount</label>
+                    <input type="number" step="0.01" name="amount" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-success w-100">Pay</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</html>

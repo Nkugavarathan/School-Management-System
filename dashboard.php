@@ -160,6 +160,8 @@ $role = $_SESSION['role'];
             <div class="col-md-4">
                 <div class="card p-3 shadow">
                     <h5>Fee Status</h5>
+                    <a href="fees/pay.php" class="btn btn-info mt-2">Pay Fees</a>
+
                     <a href="fees/status.php" class="btn btn-warning mt-2">View Fees</a>
                 </div>
             </div>

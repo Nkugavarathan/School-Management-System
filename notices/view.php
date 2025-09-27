@@ -3,7 +3,7 @@ include("../config.php");
 // session_start();
 
 // Only students/parents allowed
-if (!isset($_SESSION['user_id']) || !in_array($_SESSION['role'], ['student', 'parent'])) {
+if (!isset($_SESSION['user_id']) || !in_array($_SESSION['role'], ['student', 'parent', 'admin'])) {
     die("Access denied");
 }
 

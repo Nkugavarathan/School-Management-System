@@ -34,6 +34,7 @@ $conn->query("UPDATE messages SET is_read=1 WHERE message_id='$id'");
 </head>
 
 <body class="container py-5">
+    <a href="../dashboard.php" class="btn btn-secondary mb-4">Back to Dashboard</a>
     <h2><?= htmlspecialchars($row['subject']) ?></h2>
     <p><b>From:</b> <?= htmlspecialchars($row['sender_name']) ?> | <b>Date:</b> <?= $row['sent_at'] ?></p>
     <div class="border p-3 mb-3"><?= nl2br(htmlspecialchars($row['body'])) ?></div>

@@ -16,6 +16,7 @@ $role = $_SESSION['role']; // ✅ check role from session
 </head>
 
 <body class="container p-5">
+    <a href="../dashboard.php" class="btn btn-secondary mb-4">Back to Dashboard</a>
 
     <h2 class="mb-4 text-center">📸 Media Gallery</h2>
     <div class="row g-3">
