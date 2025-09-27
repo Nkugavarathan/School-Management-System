@@ -87,7 +87,7 @@ $role = $_SESSION['role'];
             <div class="col-md-4">
                 <div class="card p-3 shadow">
                     <h5>Fee Management</h5>
-                    <a href="fees/list.php" class="btn btn-warning mt-2">Manage Fees</a>
+                    <a href="fees/add.php" class="btn btn-warning mt-2">Manage Fees</a>
                 </div>
             </div>
 
@@ -177,7 +177,18 @@ $role = $_SESSION['role'];
                     <a href="notices/view.php" class="btn btn-info mt-2">View Notices</a>
                 </div>
             </div>
+
+
+
         <?php } ?>
+
+        <!-- Messaging Card (Visible to all roles) -->
+        <div class="col-md-4">
+            <div class="card p-3 shadow">
+                <h5>Messaging System</h5>
+                <a href="messages/inbox.php" class="btn btn-primary mt-2">Go to Messages</a>
+            </div>
+        </div>
 
     </div>
 
