@@ -65,6 +65,7 @@ $role = $_SESSION['role'];
                 <div class="card p-3 shadow">
                     <h5>User Management</h5>
                     <a href="users/manage.php" class="btn btn-primary mt-2">Manage Users</a>
+
                 </div>
             </div>
 
