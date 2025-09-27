@@ -1,4 +1,8 @@
-<?php include("config.php"); ?>
+<?php
+include("config.php");
+// session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -11,6 +15,11 @@
     <div class="card p-4 shadow-lg" style="width: 100%; max-width: 400px;">
         <a href="index.php" class="btn btn-danger w-100 mb-1">Back to Homepage</a>
         <h2 class="text-center mb-4">Register New User</h2>
+
+        <?php if (isset($_GET['registered'])): ?>
+            <div class="alert alert-success text-center">User registered successfully! Please log in.</div>
+        <?php endif; ?>
+
         <form method="POST">
             <div class="mb-3">
                 <input type="text" name="username" class="form-control" placeholder="Username" required>
@@ -32,9 +41,6 @@
         <p class="text-center mt-3 mb-0">
             Already have an account? <a href="login.php" class="text-decoration-underline">Login here</a>
         </p>
-        <?php if (isset($_GET['registered'])): ?>
-            <div class="alert alert-success text-center">User registered successfully! Please log in.</div>
-        <?php endif; ?>
     </div>
 </body>
 
@@ -46,15 +52,25 @@ if (isset($_POST['register'])) {
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
     $role     = $_POST['role'];
 
-    // Check if user already exists with same username and role
+    // Check for duplicate user
     $checkSql = "SELECT * FROM users WHERE username='$username' AND role='$role'";
     $checkResult = $conn->query($checkSql);
 
     if ($checkResult->num_rows > 0) {
         echo "<div class='alert alert-danger text-center mt-3'>User already exists with this role!</div>";
     } else {
+        // Insert into users table
         $sql = "INSERT INTO users(username,password,role) VALUES('$username','$password','$role')";
         if ($conn->query($sql)) {
+            $user_id = $conn->insert_id;
+
+            // Insert into role-specific table
+            if ($role == 'teacher') {
+                $conn->query("INSERT INTO teachers (user_id, name, subject) VALUES ('$user_id', '$username', 'Unknown')");
+            } elseif ($role == 'student') {
+                $conn->query("INSERT INTO students (user_id, name, grade) VALUES ('$user_id', '$username', 'Unassigned')");
+            }
+
             header("Location: login.php?registered=1");
             exit();
         } else {

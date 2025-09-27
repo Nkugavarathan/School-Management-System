@@ -46,7 +46,11 @@ if (isset($_POST['login'])) {
             $_SESSION['role']    = $row['role'];
 
             if ($row['role'] == "teacher") {
-                $_SESSION['teacher_id'] = $row['user_id'];
+                $tq = $conn->query("SELECT teacher_id FROM teachers WHERE user_id = '" . $row['user_id'] . "'");
+                if ($tq && $tq->num_rows > 0) {
+                    $trow = $tq->fetch_assoc();
+                    $_SESSION['teacher_id'] = $trow['teacher_id'];
+                }
             }
 
             header("Location: dashboard.php");

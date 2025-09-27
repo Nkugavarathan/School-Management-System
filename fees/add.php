@@ -31,6 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body class="bg-light">
 
     <div class="container py-5">
+        <a href="../dashboard.php" class="btn btn-danger w-100 mb-1">Back to Dashboard</a>
+
         <h2 class="text-center mb-4">💰 Fee Management</h2>
 
         <div class="row g-4">

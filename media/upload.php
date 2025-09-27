@@ -51,6 +51,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <body class="bg-primary text-white d-flex justify-content-center align-items-center vh-100">
     <div class="card shadow p-4 bg-light text-dark" style="max-width: 600px; width: 100%;">
+        <a href="../dashboard.php" class="btn btn-secondary mb-4">Back to Dashboard</a>
+
         <h2 class="text-center mb-4">📤 Upload Event Media</h2>
 
         <form method="post" enctype="multipart/form-data">

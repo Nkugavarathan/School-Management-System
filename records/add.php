@@ -13,6 +13,8 @@ if ($_SESSION['role'] != 'teacher' && $_SESSION['role'] != 'admin') {
 </head>
 
 <body class="container p-5">
+    <a href="../dashboard.php" class="btn btn-secondary mb-4">Back to Dashboard</a>
+
     <h2>Add Academic Record</h2>
     <form method="POST">
         <input type="number" name="student_id" class="form-control mb-2" placeholder="Student ID" required>
