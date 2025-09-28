@@ -46,7 +46,7 @@ $feesCollected = $row['total'] ?? 0;
 // ------------------
 // Fees Due (from fees table)
 // ------------------
-$result = $conn->query("SELECT SUM(due_amount) AS total FROM fees WHERE status='due'");
+$result = $conn->query("SELECT SUM(due_amount) AS total FROM fees WHERE status='unpaid'");
 $row = $result->fetch_assoc();
 $feesDue = $row['total'] ?? 0;
 
@@ -126,11 +126,13 @@ $feesDue = $feesDue ?: 0;
         new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Collected', 'Due'],
+                labels: ['Fees Collected', 'Fees Unpaid'],
+
                 datasets: [{
                     label: 'Fees (₹)',
                     data: [<?= $feesCollected ?>, <?= $feesDue ?>],
-                    backgroundColor: ['#198754', '#dc3545']
+                    backgroundColor: ['#198754', '#dc3545'] // green for collected, red for unpaid
+
                 }]
             },
             options: {

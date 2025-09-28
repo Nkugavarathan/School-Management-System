@@ -2,6 +2,8 @@
 include("../config.php");
 // session_start();
 
+$success = $error = "";
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $student_id = $_POST['student_id'];
     $due_amount = $_POST['due_amount'];
@@ -11,13 +13,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             VALUES ('$student_id', '$due_amount', '$due_date')";
 
     if ($conn->query($sql)) {
-        echo "Fee added successfully!";
+        $success = "💸 Fee added successfully! Student ID: $student_id";
     } else {
-        echo "Error: " . $conn->error;
+        $error = "❌ Error: " . $conn->error;
     }
 }
 ?>
-
 
 
 <html>
@@ -29,17 +30,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 
 <body class="bg-light">
-
     <div class="container py-5">
         <a href="../dashboard.php" class="btn btn-danger w-100 mb-3">Back to Dashboard</a>
-
-        <h2 class="text-center mb-5">💰 Fee Management</h2>
+        <h2 class="text-center mb-4">💰 Fee Management</h2>
 
         <div class="d-flex justify-content-center align-items-start" style="min-height: 60vh;">
             <div class="col-md-6">
                 <div class="card shadow-lg w-100">
                     <div class="card-header bg-primary text-white text-center">Add Fee</div>
                     <div class="card-body">
+
+                        <?php if ($success): ?>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <?= $success ?>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        <?php endif; ?>
+
+                        <?php if ($error): ?>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <?= $error ?>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        <?php endif; ?>
+
                         <form method="post">
                             <div class="mb-3">
                                 <label class="form-label">Student ID</label>
@@ -61,6 +75,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     </div>
 
+    <!-- Bootstrap JS for dismissible alerts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

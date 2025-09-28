@@ -21,6 +21,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $conn->query($sql2);
 
     echo "✅ Payment recorded successfully! Receipt No: " . $receipt_no;
+
+    $remaining = $amount;
+
+    // Fetch unpaid fees in order
+    $fees = $conn->query("SELECT * FROM fees WHERE student_id = '$student_id' AND status = 'unpaid' ORDER BY due_date ASC");
+
+    while ($fee = $fees->fetch_assoc()) {
+        $fee_id = $fee['fee_id'];
+        $due = $fee['due_amount'];
+
+        if ($remaining <= 0) break;
+
+        if ($remaining >= $due) {
+            // Full payment for this fee
+            $conn->query("UPDATE fees SET due_amount = 0, status = 'paid' WHERE fee_id = '$fee_id'");
+            $remaining -= $due;
+        } else {
+            // Partial payment
+            $new_due = $due - $remaining;
+            $conn->query("UPDATE fees SET due_amount = '$new_due', status = 'partial' WHERE fee_id = '$fee_id'");
+            $remaining = 0;
+        }
+    }
 }
 ?>
 
