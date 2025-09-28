@@ -1,4 +1,7 @@
-<?php include("config.php"); ?>
+<?php
+include("config.php");
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -40,8 +43,11 @@ if (isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $sql = "SELECT * FROM users WHERE username='$username'";
-    $result = $conn->query($sql);
+    // Use prepared statement for security
+    $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
@@ -49,21 +55,38 @@ if (isset($_POST['login'])) {
         if (password_verify($password, $row['password'])) {
             $_SESSION['user_id'] = $row['user_id'];
             $_SESSION['role']    = $row['role'];
+            $_SESSION['username'] = $row['username'];
 
-            if ($row['role'] == "teacher") {
-                $tq = $conn->query("SELECT teacher_id FROM teachers WHERE user_id = '" . $row['user_id'] . "'");
-                if ($tq && $tq->num_rows > 0) {
-                    $trow = $tq->fetch_assoc();
+            // If teacher, store teacher_id
+            if ($row['role'] === "teacher") {
+                $tq = $conn->prepare("SELECT teacher_id FROM teachers WHERE user_id = ?");
+                $tq->bind_param("i", $row['user_id']);
+                $tq->execute();
+                $tres = $tq->get_result();
+                if ($tres->num_rows > 0) {
+                    $trow = $tres->fetch_assoc();
                     $_SESSION['teacher_id'] = $trow['teacher_id'];
                 }
             }
 
-            if ($row['role'] == "admin") {
+            // If student, store student_id
+            if ($row['role'] === "student") {
+                $sq = $conn->prepare("SELECT student_id FROM students WHERE user_id = ?");
+                $sq->bind_param("i", $row['user_id']);
+                $sq->execute();
+                $sres = $sq->get_result();
+                if ($sres->num_rows > 0) {
+                    $srow = $sres->fetch_assoc();
+                    $_SESSION['student_id'] = $srow['student_id'];
+                }
+            }
+
+            // Redirect based on role
+            if ($row['role'] === "admin") {
                 header("Location: admin_dashboard.php");
             } else {
                 header("Location: dashboard.php");
             }
-            exit();
             exit();
         } else {
             echo "<div class='alert alert-danger text-center mt-3'>Invalid password!</div>";
@@ -72,4 +95,3 @@ if (isset($_POST['login'])) {
         echo "<div class='alert alert-danger text-center mt-3'>User not found!</div>";
     }
 }
-?>
