@@ -52,6 +52,9 @@ $result = $conn->query($sql);
                                 onclick="return confirm('Are you sure you want to delete this user?')">Delete</a>
                             <?php if ($row['role'] == 'student') { ?>
                                 <a href="../fees/add.php?student_id=<?= $row['student_id'] ?>" class="btn btn-warning btn-sm">Add Fee</a>
+                                <a href="../records/add.php?student_id=<?= $row['student_id'] ?>" class="btn btn-secondary btn-sm">Add Record</a>
+                                <a href="../attendance/add.php?student_id=<?= $row['student_id'] ?>" class="btn btn-success btn-sm">Add Attendadce</a>
+
                             <?php } ?>
                         </td>
                     </tr>

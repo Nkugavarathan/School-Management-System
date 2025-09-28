@@ -31,15 +31,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body class="bg-light">
 
     <div class="container py-5">
-        <a href="../dashboard.php" class="btn btn-danger w-100 mb-1">Back to Dashboard</a>
+        <a href="../dashboard.php" class="btn btn-danger w-100 mb-3">Back to Dashboard</a>
 
-        <h2 class="text-center mb-4">💰 Fee Management</h2>
+        <h2 class="text-center mb-5">💰 Fee Management</h2>
 
-        <div class="row g-4">
-            <!-- Add Fee -->
+        <div class="d-flex justify-content-center align-items-start" style="min-height: 60vh;">
             <div class="col-md-6">
-                <div class="card shadow-lg">
-                    <div class="card-header bg-primary text-white">Add Fee</div>
+                <div class="card shadow-lg w-100">
+                    <div class="card-header bg-primary text-white text-center">Add Fee</div>
                     <div class="card-body">
                         <form method="post">
                             <div class="mb-3">
@@ -59,12 +58,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                 </div>
             </div>
-
-
-
-
-
         </div>
+    </div>
 
 </body>
 
