@@ -1,14 +1,16 @@
 <?php
 include("../config.php");
-
+// session_start();
 
 // Only admin allowed
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] != "admin") {
     die("Access denied");
 }
 
-// Fetch all users
-$sql = "SELECT * FROM users";
+// Fetch all users with student info if applicable
+$sql = "SELECT users.*, students.student_id 
+        FROM users 
+        LEFT JOIN students ON users.user_id = students.user_id";
 $result = $conn->query($sql);
 ?>
 <!DOCTYPE html>
@@ -21,7 +23,7 @@ $result = $conn->query($sql);
 
 <body class="container p-5">
     <h2>Manage Users</h2>
-    <a href="add.php" class="btn btn-success mb-3">Add New User</a>
+
     <a href="../dashboard.php" class="btn btn-secondary mb-3">Back to Dashboard</a>
     <table class="table table-bordered table-striped">
         <thead>
@@ -34,15 +36,23 @@ $result = $conn->query($sql);
         </thead>
         <tbody>
             <?php if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) { ?>
+                while ($row = $result->fetch_assoc()) {
+                    $usernameDisplay = htmlspecialchars($row['username']);
+                    if ($row['role'] == 'student' && !empty($row['student_id'])) {
+                        $usernameDisplay .= " (student_id=" . htmlspecialchars($row['student_id']) . ")";
+                    }
+            ?>
                     <tr>
-                        <td><?= $row['user_id'] ?></td>
-                        <td><?= $row['username'] ?></td>
-                        <td><?= $row['role'] ?></td>
+                        <td><?= htmlspecialchars($row['user_id']) ?></td>
+                        <td><?= $usernameDisplay ?></td>
+                        <td><?= htmlspecialchars($row['role']) ?></td>
                         <td>
                             <a href="edit.php?id=<?= $row['user_id'] ?>" class="btn btn-primary btn-sm">Edit</a>
                             <a href="delete.php?id=<?= $row['user_id'] ?>" class="btn btn-danger btn-sm"
                                 onclick="return confirm('Are you sure you want to delete this user?')">Delete</a>
+                            <?php if ($row['role'] == 'student') { ?>
+                                <a href="../fees/add.php?student_id=<?= $row['student_id'] ?>" class="btn btn-warning btn-sm">Add Fee</a>
+                            <?php } ?>
                         </td>
                     </tr>
                 <?php }
