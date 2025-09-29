@@ -42,6 +42,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             document.getElementById('studentNameField').style.display = role === 'student' ? 'block' : 'none';
         }
     </script>
+    <style>
+        body {
+            background-color: #98c5ecff !important;
+        }
+    </style>
 </head>
 
 <body class="container p-5">

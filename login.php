@@ -6,19 +6,19 @@ include("config.php");
 <html>
 
 <head>
-    <!-- <style>
-        * {
-            background: linear-gradient(to right, rgba(13, 110, 253, 0.7), rgba(11, 30, 63, 0.7));
+    <style>
+        body {
+            background-color: #98c5ecff !important;
         }
-    </style> -->
-    <title>Login</title>
+    </style>
+    <title>LogIn</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
-<body class=" bg-primary d-flex justify-content-center align-items-center vh-100 text-white">
+<body class=" d-flex justify-content-center align-items-center vh-100 text-white">
 
     <div class="card p-4 shadow-lg" style="width: 100%; max-width: 400px;">
-        <a href="index.php" class="btn btn-danger w-100 mb-1">Back to Homepage</a>
+        <a href="index.php" class="btn btn-secondary w-100 mb-1">Back to Homepage</a>
 
         <h2 class="text-center mb-4">Login</h2>
         <form method="POST">

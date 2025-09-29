@@ -63,13 +63,20 @@ $feesDue = $feesDue ?: 0;
     <title>Admin Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body {
+            background-color: #98c5ecff !important;
+        }
+    </style>
+
 </head>
 
-<body class="bg-light">
+<body>
 
     <div class="container py-4">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="text-primary">Admin Dashboard</h2>
+            <h2 class="text-primary  fw-bold">Admin Dashboard</h2>
             <a href="logout.php" class="btn btn-danger">Logout</a>
         </div>
 
@@ -108,7 +115,7 @@ $feesDue = $feesDue ?: 0;
             <div class="col-md-3">
                 <div class="card shadow p-3 bg-primary text-white text-center">
 
-                    <a href="dashboard.php" class="btn btn-light mt-2">Edit details</a>
+                    <a href="dashboard.php" class="btn btn-light mt-2">Edit User Details</a>
                 </div>
             </div>
 

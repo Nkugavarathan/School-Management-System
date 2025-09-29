@@ -9,9 +9,14 @@ include("../config.php");
 <head>
     <title>View Academic Records</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #98c5ecff !important;
+        }
+    </style>
 </head>
 
-<body class="bg-light p-5">
+<body class=" p-5">
     <div class="container">
         <a href="../dashboard.php" class="btn btn-secondary w-100 mb-4">Back to Dashboard</a>
         <h2 class="text-center mb-4">📚 Academic Records</h2>

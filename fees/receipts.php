@@ -6,9 +6,14 @@ include("../config.php");
 
 <head>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <style>
+                body {
+                        background-color: #98c5ecff !important;
+                }
+        </style>
 </head>
 
-<body class="bg-light">
+<body>
         <div class="card mt-5 shadow-lg">
                 <div class="card-header bg-dark text-white">📜 Payment Receipts</div>
                 <div class="card-body">

@@ -54,9 +54,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <title>Upload Study Material</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #98c5ecff !important;
+        }
+    </style>
 </head>
 
-<body class="bg-primary text-white d-flex justify-content-center align-items-center vh-100">
+<body class="text-white d-flex justify-content-center align-items-center vh-100">
     <div class="card shadow p-4 bg-light text-dark" style="max-width: 600px; width: 100%;">
         <a href="../dashboard.php" class="btn btn-secondary mb-4">Back to Dashboard</a>
 

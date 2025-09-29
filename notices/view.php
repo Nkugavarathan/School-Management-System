@@ -20,6 +20,11 @@ $result = $conn->query($sql);
 <head>
     <title>Notice Board</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #98c5ecff !important;
+        }
+    </style>
 </head>
 
 <body class="container py-5">

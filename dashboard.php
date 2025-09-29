@@ -48,15 +48,20 @@ $role = $_SESSION['role'];
     <meta charset="UTF-8">
     <title>Dashboard</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #98c5ecff !important;
+        }
+    </style>
 </head>
 
 <body class="container py-5">
 
     <div class="d-flex justify-content-between align-items-center mb-4">
         <?php if ($role == "admin") { ?>
-            <a href="admin_dashboard.php" class="btn btn-outline-primary me-2">Back to Admin Dashboard</a>
+            <a href="admin_dashboard.php" class="btn btn-primary me-2">Back to Admin Dashboard</a>
         <?php } ?>
-        <h2>Welcome, <span class="text-primary"><?= ucfirst($role) ?></span>!</h2>
+        <h2 class="fw-bold">Welcome, <span class="text-primary"><?= ucfirst($role) ?></span>!</h2>
         <a href="logout.php" class="btn btn-danger">Logout</a>
     </div>
 

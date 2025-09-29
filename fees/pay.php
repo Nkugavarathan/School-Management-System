@@ -51,9 +51,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #98c5ecff !important;
+        }
+    </style>
 </head>
 
-<body class="bg-light d-flex justify-content-center align-items-center vh-100">
+<body class="d-flex justify-content-center align-items-center vh-100">
     <div class="col-md-6">
         <a href="../dashboard.php" class="btn btn-secondary mb-4 ">Back to Dashboard</a>
 

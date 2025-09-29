@@ -14,9 +14,14 @@ if ($_SESSION['role'] != 'teacher' && $_SESSION['role'] != 'admin') {
 <head>
     <title>Mark Attendance</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #98c5ecff !important;
+        }
+    </style>
 </head>
 
-<body class="bg-primary d-flex justify-content-center align-items-center vh-100 text-white">
+<body class=" d-flex justify-content-center align-items-center vh-100 text-white">
     <div class="card p-4 shadow-lg" style="width: 100%; max-width: 400px;">
         <a href="../dashboard.php" class="btn btn-secondary mb-4">Back to Dashboard</a>
 

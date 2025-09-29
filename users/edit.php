@@ -32,6 +32,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <title>Edit User</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #98c5ecff !important;
+        }
+    </style>
 </head>
 
 <body class="container p-5">

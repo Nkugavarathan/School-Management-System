@@ -30,6 +30,11 @@ $users = $conn->query("SELECT user_id, username, role FROM users WHERE user_id !
 <head>
     <title>Send Message</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #98c5ecff !important;
+        }
+    </style>
 </head>
 
 <body class="container py-5">

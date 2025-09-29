@@ -28,9 +28,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <title>Add Notice</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #98c5ecff !important;
+        }
+    </style>
 </head>
 
-<body class="bg-light d-flex justify-content-center align-items-center vh-100">
+<body class="d-flex justify-content-center align-items-center vh-100">
     <div class="col-md-6">
         <div class="card shadow-lg w-100">
             <div class="card-header bg-primary text-white text-center">

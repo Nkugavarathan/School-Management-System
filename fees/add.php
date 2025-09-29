@@ -27,11 +27,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <title>Fee Management</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #98c5ecff !important;
+        }
+    </style>
 </head>
 
-<body class="bg-light">
+<body>
     <div class="container py-5">
-        <a href="../dashboard.php" class="btn btn-danger w-100 mb-3">Back to Dashboard</a>
+        <a href="../dashboard.php" class="btn btn-secondary  mb-3">Back to Dashboard</a>
         <h2 class="text-center mb-4">💰 Fee Management</h2>
 
         <div class="d-flex justify-content-center align-items-start" style="min-height: 60vh;">

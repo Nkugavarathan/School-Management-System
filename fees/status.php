@@ -9,9 +9,14 @@ $student_id = $_SESSION['student_id'] ?? null;
 
 <head>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #98c5ecff !important;
+    }
+  </style>
 </head>
 
-<body class="bg-light container p-5">
+<body class=" container p-5">
   <a href="../dashboard.php" class="btn btn-secondary mb-4">Back to Dashboard</a>
   <div class="card shadow-lg">
     <div class="card-header bg-info text-white">🔎 Your Fee Status</div>

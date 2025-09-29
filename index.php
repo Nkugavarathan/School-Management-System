@@ -20,7 +20,7 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             scroll-behavior: smooth;
-            background-color: #f0f8ff;
+            background-color: #98c5ecff;
             color: #212529;
         }
 
@@ -74,13 +74,13 @@
             margin-bottom: 15px;
         }
 
-        /* #contact {
+        #contact {
             background-color: #cfe2ff;
-          
+            border-radius: 5px;
             padding: 60px 0;
             color: #212529;
-            width: 100%;
-        } */
+            width: 50%;
+        }
 
         footer {
             background-color: #0b1e3f;
