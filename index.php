@@ -189,6 +189,34 @@
         </div>
     </footer>
 
+
+    <!-- Scroll to Top Button -->
+    <a href="#" id="scrollTopBtn" class="btn btn-primary rounded-circle shadow fw-bold"
+        style="position: fixed; bottom: 30px; right: 30px; display: none; z-index: 999; "
+        data-aos="fade-up">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+    <script>
+        window.addEventListener("scroll", function() {
+            const btn = document.getElementById("scrollTopBtn");
+            if (window.scrollY > 200) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        });
+
+
+        document.getElementById("scrollTopBtn").addEventListener("click", function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+    </script>
+
+
     <!-- JS Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>

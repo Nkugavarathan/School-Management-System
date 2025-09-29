@@ -11,6 +11,10 @@ include("config.php");
             background-color: #98c5ecff !important;
         }
     </style>
+    <!-- Toastify CSS & JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
     <title>LogIn</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
@@ -89,9 +93,27 @@ if (isset($_POST['login'])) {
             }
             exit();
         } else {
-            echo "<div class='alert alert-danger text-center mt-3'>Invalid password!</div>";
+            echo "<script>
+Toastify({
+  text: 'Invalid password!',
+  duration: 3000,
+  gravity: 'top',
+  position: 'center',
+  backgroundColor: '#dc3545',
+  stopOnFocus: true
+}).showToast();
+</script>";
         }
     } else {
-        echo "<div class='alert alert-danger text-center mt-3'>User not found!</div>";
+        echo "<script>
+Toastify({
+  text: 'User not found!',
+  duration: 3000,
+  gravity: 'top',
+  position: 'center',
+  backgroundColor: '#dc3545',
+  stopOnFocus: true
+}).showToast();
+</script>";
     }
 }
