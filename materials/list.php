@@ -1,6 +1,6 @@
 <?php
+session_start();
 include("../config.php");
-// session_start();
 
 $sql = "SELECT m.*, t.name as teacher_name 
         FROM materials m 
@@ -15,6 +15,7 @@ $res = $conn->query($sql);
     <meta charset="UTF-8">
     <title>Study Materials</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <style>
         body {
             background-color: #98c5ecff !important;
@@ -38,7 +39,7 @@ $res = $conn->query($sql);
                             <th>Description</th>
                             <th>Uploaded By</th>
                             <th>Date</th>
-                            <th>Download</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -49,7 +50,15 @@ $res = $conn->query($sql);
                                 <td><?= htmlspecialchars($row['teacher_name'] ?? 'Admin') ?></td>
                                 <td><?= htmlspecialchars($row['upload_date']) ?></td>
                                 <td>
-                                    <a href="<?= htmlspecialchars($row['file_path']) ?>" class="btn btn-sm btn-success" download>Download</a>
+                                    <a href="<?= htmlspecialchars($row['file_path']) ?>" class="btn btn-sm btn-success me-2" download>
+                                        <i class="fas fa-download"></i> Download
+                                    </a>
+
+                                    <?php if (in_array($_SESSION['role'], ['admin', 'teacher'])): ?>
+                                        <a href="delete.php?id=<?= $row['material_id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this material?');">
+                                            <i class="fas fa-trash-alt"></i> Delete
+                                        </a>
+                                    <?php endif; ?>
                                 </td>
                             </tr>
                         <?php endwhile; ?>

@@ -1,6 +1,6 @@
 <?php
+session_start();
 include("../config.php");
-// session_start();/
 
 // Role check
 $role = strtolower($_SESSION['role'] ?? '');
@@ -16,6 +16,9 @@ if ($role === 'teacher') {
         die("<div class='alert alert-danger text-center'>Error: teacher_id missing in session</div>");
     }
 }
+
+$toastMessage = '';
+$toastType = 'success'; // or 'error'
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = $conn->real_escape_string($_POST['title']);
@@ -37,12 +40,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 VALUES (" . ($teacher_id ? "'$teacher_id'" : "NULL") . ", '$title', '$desc', '$relative_path', NOW())";
 
         if ($conn->query($sql)) {
-            echo "<div class='alert alert-success text-center mt-3'>📁 File uploaded successfully!</div>";
+            $toastMessage = "📁 File uploaded successfully!";
+            $toastType = 'success';
         } else {
-            echo "<div class='alert alert-danger text-center mt-3'>Database error: " . $conn->error . "</div>";
+            $toastMessage = "Database error: " . $conn->error;
+            $toastType = 'error';
         }
     } else {
-        echo "<div class='alert alert-danger text-center mt-3'>File upload failed!</div>";
+        $toastMessage = "File upload failed!";
+        $toastType = 'error';
     }
 }
 ?>
@@ -54,6 +60,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <title>Upload Study Material</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <style>
         body {
             background-color: #98c5ecff !important;
@@ -92,6 +101,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </form>
     </div>
+
+    <?php if (!empty($toastMessage)): ?>
+        <script>
+            Toastify({
+                text: "<?= addslashes($toastMessage) ?>",
+                duration: 4000,
+                gravity: "top",
+                position: "center",
+                backgroundColor: "<?= $toastType === 'success' ? '#198754' : '#dc3545' ?>",
+                stopOnFocus: true
+            }).showToast();
+        </script>
+    <?php endif; ?>
 </body>
 
 </html>

@@ -29,6 +29,14 @@ $row = $result->fetch_assoc();
 $totalParents = $row['total'] ?? 0;
 
 // ------------------
+// Unread Messages Count
+// ------------------
+$result = $conn->query("SELECT COUNT(*) AS total FROM messages WHERE receiver_id='{$_SESSION['user_id']}' AND is_read=0");
+$row = $result->fetch_assoc();
+$unreadMessages = $row['total'] ?? 0;
+
+
+// ------------------
 // Today's Attendance
 // ------------------
 $today = date('Y-m-d');
@@ -112,6 +120,14 @@ $feesDue = $feesDue ?: 0;
                     <h2>₹<?= number_format($feesCollected, 2) ?></h2>
                 </div>
             </div>
+            <div class="col-md-3">
+                <div class="card shadow p-3 bg-secondary text-white text-center">
+                    <h5>Unread Messages</h5>
+                    <h2><?= $unreadMessages ?></h2>
+                    <a href="./messages/inbox.php" class="btn btn-light mt-2">View Messages</a>
+                </div>
+            </div>
+
             <div class="col-md-3">
                 <div class="card shadow p-3 bg-primary text-white text-center">
 

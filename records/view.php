@@ -18,7 +18,7 @@ include("../config.php");
 
 <body class=" p-5">
     <div class="container">
-        <a href="../dashboard.php" class="btn btn-secondary w-100 mb-4">Back to Dashboard</a>
+        <a href="../dashboard.php" class="btn btn-secondary  mb-4">Back to Dashboard</a>
         <h2 class="text-center mb-4">📚 Academic Records</h2>
 
         <div class="table-responsive">

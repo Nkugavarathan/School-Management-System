@@ -82,23 +82,25 @@
             width: 50%;
         }
 
+        .footernav a {
+            text-decoration: none;
+            margin: 0 10px;
+            color: #ccc;
+            transition: color 0.3s;
+        }
+
+        .footernav a:hover {
+            color: #5bc0ff;
+        }
+
         footer {
             background-color: #0b1e3f;
             color: #ccc;
             padding: 40px 0 20px 0;
         }
 
-        footer a {
-            color: #fff;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
         .social-icons a {
-            margin-right: 15px;
+            margin: 0 10px;
             color: #fff;
             font-size: 1.5rem;
             transition: color 0.3s;
@@ -108,6 +110,10 @@
             color: #5bc0ff;
         }
     </style>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/logoo.png">
+
 </head>
 
 <body>
@@ -115,7 +121,11 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color:#0b1e3f;">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="#">SSMS</a>
+            <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="#">
+                <img src="./assets/logoo.png" alt="SSMS Logo" width="40" height="40" style="border-radius: 10px;">
+                SSMS
+            </a>
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -185,9 +195,17 @@
                     <a href="#"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
+            <div class="row mb-3">
+                <div class="col-md-12 footernav">
+                    <a href="./login.php">Login</a>
+                    <a href="./register.php">Register</a>
+                    <a href="#contact">Contact Us</a>
+                </div>
+            </div>
             <p>&copy; <?= date('Y') ?> Smart School Management System. All rights reserved.</p>
         </div>
     </footer>
+
 
 
     <!-- Scroll to Top Button -->

@@ -40,9 +40,18 @@ $conn->query("UPDATE messages SET is_read=1 WHERE message_id='$id'");
 
 <body class="container py-5">
     <a href="../dashboard.php" class="btn btn-secondary mb-4">Back to Dashboard</a>
-    <h2><?= htmlspecialchars($row['subject']) ?></h2>
-    <p><b>From:</b> <?= htmlspecialchars($row['sender_name']) ?> | <b>Date:</b> <?= $row['sent_at'] ?></p>
-    <div class="border p-3 mb-3"><?= nl2br(htmlspecialchars($row['body'])) ?></div>
+    <div class="card shadow-lg mb-4">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0"><?= htmlspecialchars($row['subject']) ?></h5>
+        </div>
+        <div class="card-body">
+            <p class="mb-2"><strong>From:</strong> <?= htmlspecialchars($row['sender_name']) ?></p>
+            <p class="mb-2"><strong>Date:</strong> <?= $row['sent_at'] ?></p>
+            <hr>
+            <p><?= nl2br(htmlspecialchars($row['body'])) ?></p>
+        </div>
+    </div>
+
     <a href="inbox.php" class="btn btn-secondary">Back to Inbox</a>
 </body>
 
