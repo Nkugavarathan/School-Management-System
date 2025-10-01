@@ -2,5 +2,13 @@
 include("../config.php");
 
 $id = $_GET['id'];
-$conn->query("DELETE FROM inventory WHERE item_id='$id'");
-echo "<script>alert('Item deleted successfully!'); window.location='view.php';</script>";
+
+if ($conn->query("DELETE FROM inventory WHERE item_id='$id'")) {
+    // Redirect with success flag
+    header("Location: view.php?deleted=1");
+    exit();
+} else {
+    // Redirect with error flag
+    header("Location: view.php?deleted=0");
+    exit();
+}
