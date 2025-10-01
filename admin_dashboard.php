@@ -61,7 +61,14 @@ $feesDue = $row['total'] ?? 0;
 // Sanitize values
 $feesCollected = $feesCollected ?: 0;
 $feesDue = $feesDue ?: 0;
+
+//Inventory count
+$result = $conn->query("SELECT SUM(quantity) AS total FROM inventory");
+$row = $result->fetch_assoc();
+$totalinventory = $row['total'] ?? 0;
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -127,7 +134,13 @@ $feesDue = $feesDue ?: 0;
                     <a href="./messages/inbox.php" class="btn btn-light mt-2">View Messages</a>
                 </div>
             </div>
-
+            <div class="col-md-3">
+                <div class="card shadow p-3 bg-info text-white text-center">
+                    <h5>Inventory Items</h5>
+                    <h2><?= $totalinventory ?></h2>
+                    <a href="./inventory/view.php" class="btn btn-light mt-2">View Inventory</a>
+                </div>
+            </div>
             <div class="col-md-3">
                 <div class="card shadow p-3 bg-primary text-white text-center">
 

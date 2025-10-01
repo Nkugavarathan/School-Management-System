@@ -3,29 +3,16 @@ include("../config.php");
 // session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $student_id = $_SESSION['student_id']; // ✅ Use session
+    $student_id = $_SESSION['student_id'];
     $amount     = $_POST['amount'];
     $receipt_no = uniqid("REC");
 
-    $sql = "INSERT INTO payments (student_id, amount, receipt_no) 
-            VALUES ('$student_id', '$amount', '$receipt_no')";
-    $conn->query($sql);
+    // Insert payment record
+    $conn->query("INSERT INTO payments (student_id, amount, receipt_no) VALUES ('$student_id', '$amount', '$receipt_no')");
 
-    $sql2 = "UPDATE fees 
-             SET due_amount = due_amount - $amount,
-                 status = CASE
-                            WHEN due_amount - $amount <= 0 THEN 'paid'
-                            ELSE 'partial'
-                          END
-             WHERE student_id = '$student_id'";
-    $conn->query($sql2);
-
-    echo "✅ Payment recorded successfully! Receipt No: " . $receipt_no;
-
+    // Sequentially apply payment to unpaid fees
     $remaining = $amount;
-
-    // Fetch unpaid fees in order
-    $fees = $conn->query("SELECT * FROM fees WHERE student_id = '$student_id' AND status = 'unpaid' ORDER BY due_date ASC");
+    $fees = $conn->query("SELECT * FROM fees WHERE student_id = '$student_id' AND status != 'paid' ORDER BY due_date ASC");
 
     while ($fee = $fees->fetch_assoc()) {
         $fee_id = $fee['fee_id'];
@@ -34,23 +21,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($remaining <= 0) break;
 
         if ($remaining >= $due) {
-            // Full payment for this fee
             $conn->query("UPDATE fees SET due_amount = 0, status = 'paid' WHERE fee_id = '$fee_id'");
             $remaining -= $due;
         } else {
-            // Partial payment
             $new_due = $due - $remaining;
             $conn->query("UPDATE fees SET due_amount = '$new_due', status = 'partial' WHERE fee_id = '$fee_id'");
             $remaining = 0;
         }
     }
+
+    // Redirect with success flag
+    header("Location: pay.php?success=1");
+    exit();
 }
 ?>
 
+
+<!DOCTYPE html>
 <html>
 
 <head>
+    <meta charset="UTF-8">
+    <title>Pay Fee</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <style>
         body {
             background-color: #98c5ecff !important;
@@ -63,7 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <a href="../dashboard.php" class="btn btn-secondary mb-4 ">Back to Dashboard</a>
 
         <div class="card shadow-lg w-100">
-
             <div class="card-header bg-success text-white text-center">Pay Fee</div>
             <div class="card-body">
                 <form method="post">
@@ -76,6 +70,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
         </div>
     </div>
+
+    <!-- Toastify Trigger -->
+    <script>
+        <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
+            Toastify({
+                text: "✅ Payment recorded successfully!",
+                duration: 4000,
+                close: true,
+                gravity: "top",
+                position: "center",
+                backgroundColor: "#198754",
+                stopOnFocus: true
+            }).showToast();
+        <?php endif; ?>
+    </script>
 </body>
 
 </html>

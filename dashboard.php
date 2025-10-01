@@ -1,34 +1,3 @@
-<?php include("config.php");
-if (!isset($_SESSION['user_id'])) {
-    header("Location: index.php");
-    exit();
-}
-?>
-
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-</head>
-
-<!-- <body class="container p-5">
-    <h2>Welcome, <?php echo $_SESSION['role']; ?>!</h2>
-    <a href="logout.php" class="btn btn-danger">Logout</a>
-
-    <?php if ($_SESSION['role'] == "teacher" || $_SESSION['role'] == "admin") { ?>
-        <h4 class="mt-3">Teacher/Admin Actions</h4>
-        <a href="attendance/add.php" class="btn btn-primary">Mark Attendance</a>
-        <a href="records/add.php" class="btn btn-success">Add Academic Record</a>
-    <?php } ?>
-
-    <?php if ($_SESSION['role'] == "student" || $_SESSION['role'] == "parent") { ?>
-        <h4 class="mt-3">Student/Parent Actions</h4>
-        <a href="attendance/view.php" class="btn btn-info">View Attendance</a>
-        <a href="records/view.php" class="btn btn-warning">View Academic Records</a>
-    <?php } ?>
-</body> -->
 <?php
 include("config.php");
 
@@ -114,6 +83,12 @@ $role = $_SESSION['role'];
                     <a href="notices/view.php" class="btn btn-info mt-2">View Notices</a>
                 </div>
             </div>
+            <div class="col-md-4">
+                <div class="card p-3 shadow">
+                    <h5>Inventory Management</h5>
+                    <a href="inventory/view.php" class="btn btn-primary mt-2">Manage Inventory</a>
+                </div>
+            </div>
         <?php } ?>
 
         <!-- Teacher Dashboard -->
@@ -145,6 +120,12 @@ $role = $_SESSION['role'];
                     <h5>Notice Board</h5>
                     <a href="notices/add.php" class="btn btn-primary mt-2">Post Notice</a>
                     <a href="notices/view.php" class="btn btn-info mt-2">View Notices</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card p-3 shadow">
+                    <h5>View Inventory</h5>
+                    <a href="inventory/view.php" class="btn btn-primary mt-2">Manage Inventory</a>
                 </div>
             </div>
         <?php } ?>
@@ -187,7 +168,12 @@ $role = $_SESSION['role'];
                     <a href="notices/view.php" class="btn btn-info mt-2">View Notices</a>
                 </div>
             </div>
-
+            <div class="col-md-4">
+                <div class="card p-3 shadow">
+                    <h5>Inventory Items</h5>
+                    <a href="inventory/view.php" class="btn btn-primary mt-2"> View Inventory</a>
+                </div>
+            </div>
 
 
         <?php } ?>
