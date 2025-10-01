@@ -12,6 +12,10 @@ $result = $conn->query($sql);
     <meta charset="UTF-8">
     <title>Inventory</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Toastify -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
     <style>
         body {
             background-color: #98c5ecff !important;
@@ -58,3 +62,36 @@ $result = $conn->query($sql);
 </body>
 
 </html>
+
+<script>
+    <?php if (isset($_GET['deleted']) && $_GET['deleted'] == 1): ?>
+        Toastify({
+            text: "🗑️ Item deleted successfully!",
+            duration: 4000,
+            close: true,
+            gravity: "top",
+            position: "center",
+            backgroundColor: "#dc3545", // red
+            stopOnFocus: true
+        }).showToast();
+
+        // Clean up URL
+        setTimeout(() => {
+            history.replaceState(null, "", window.location.pathname);
+        }, 4200);
+    <?php elseif (isset($_GET['deleted']) && $_GET['deleted'] == 0): ?>
+        Toastify({
+            text: "❌ Failed to delete item!",
+            duration: 4000,
+            close: true,
+            gravity: "top",
+            position: "center",
+            backgroundColor: "#6c757d", // gray
+            stopOnFocus: true
+        }).showToast();
+
+        setTimeout(() => {
+            history.replaceState(null, "", window.location.pathname);
+        }, 4200);
+    <?php endif; ?>
+</script>
