@@ -1,18 +1,22 @@
 <?php
 include("../config.php");
-// session_start();
 
-$downloadLink = "";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $student_id = $_SESSION['student_id'];
+    // Determine student ID based on role
+    if (isset($_SESSION['role']) && $_SESSION['role'] === 'parent') {
+        $student_id = $_POST['student_id']; // From input field
+    } else {
+        $student_id = $_SESSION['student_id']; // From session
+    }
+
     $amount     = $_POST['amount'];
     $receipt_no = uniqid("REC");
 
     // Insert payment record
     $conn->query("INSERT INTO payments (student_id, amount, receipt_no, payment_date) VALUES ('$student_id', '$amount', '$receipt_no', NOW())");
 
-    // Sequentially apply payment to unpaid fees
+    // Apply payment to unpaid fees
     $remaining = $amount;
     $fees = $conn->query("SELECT * FROM fees WHERE student_id = '$student_id' AND status != 'paid' ORDER BY due_date ASC");
 
@@ -32,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    // Redirect back with success and receipt number
+    // Redirect with success
     header("Location: pay.php?success=1&receipt_no=$receipt_no");
     exit();
 }
@@ -62,11 +66,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="card-header bg-success text-white text-center">Pay Fee</div>
             <div class="card-body">
                 <form method="post">
-                    <div class="mb-3">
+                    <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'parent'): ?>
+                        <div class="mb-3">
+                            <label class="form-label">Student ID</label>
+                            <input type="text" name="student_id" class="form-control" required>
+                        <?php endif; ?>
                         <label class="form-label">Amount</label>
                         <input type="number" step="0.01" name="amount" class="form-control" required>
-                    </div>
-                    <button type="submit" class="btn btn-success w-100">Pay</button>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100">Pay</button>
                 </form>
 
                 <?php if (isset($_GET['success']) && $_GET['success'] == 1 && isset($_GET['receipt_no'])): ?>
