@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <div class="mt-3 text-center">
                         <a href="generate_receipt.php?receipt_no=<?= $_GET['receipt_no']; ?>"
                             target="_blank" class="btn btn-primary w-100">
-                            View / Download Payment Receipt (PDF)
+                            Download Payment Receipt (PDF)
                         </a>
                     </div>
                 <?php endif; ?>
