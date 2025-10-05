@@ -51,10 +51,12 @@ $result = $conn->query($sql);
                     <td><?= $row['name'] ?></td>
                     <td><?= $row['quantity'] ?></td>
                     <td><?= $row['category'] ?></td>
-                    <td>
-                        <a href="edit.php?id=<?= $row['item_id'] ?>" class="btn btn-sm btn-warning">Edit</a>
-                        <a href="delete.php?id=<?= $row['item_id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Delete this item?');">Delete</a>
-                    </td>
+                    <?php if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'teacher') { ?>
+                        <td>
+                            <a href="edit.php?id=<?= $row['item_id'] ?>" class="btn btn-sm btn-warning">Edit</a>
+                            <a href="delete.php?id=<?= $row['item_id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Delete this item?');">Delete</a>
+                        </td>
+                    <?php } ?>
                 </tr>
             <?php } ?>
         </tbody>

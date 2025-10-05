@@ -2,13 +2,15 @@
 include("../config.php");
 // session_start();
 
+$downloadLink = "";
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $student_id = $_SESSION['student_id'];
     $amount     = $_POST['amount'];
     $receipt_no = uniqid("REC");
 
     // Insert payment record
-    $conn->query("INSERT INTO payments (student_id, amount, receipt_no) VALUES ('$student_id', '$amount', '$receipt_no')");
+    $conn->query("INSERT INTO payments (student_id, amount, receipt_no, payment_date) VALUES ('$student_id', '$amount', '$receipt_no', NOW())");
 
     // Sequentially apply payment to unpaid fees
     $remaining = $amount;
@@ -30,12 +32,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    // Redirect with success flag
-    header("Location: pay.php?success=1");
+    // Redirect back with success and receipt number
+    header("Location: pay.php?success=1&receipt_no=$receipt_no");
     exit();
 }
 ?>
-
 
 <!DOCTYPE html>
 <html>
@@ -67,6 +68,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                     <button type="submit" class="btn btn-success w-100">Pay</button>
                 </form>
+
+                <?php if (isset($_GET['success']) && $_GET['success'] == 1 && isset($_GET['receipt_no'])): ?>
+                    <div class="mt-3 text-center">
+                        <a href="generate_receipt.php?receipt_no=<?= $_GET['receipt_no']; ?>"
+                            target="_blank" class="btn btn-primary w-100">
+                            View / Download Payment Receipt (PDF)
+                        </a>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
     </div>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 29, 2025 at 10:21 PM
+-- Generation Time: Oct 04, 2025 at 05:51 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -112,11 +112,31 @@ CREATE TABLE `fees` (
 --
 
 INSERT INTO `fees` (`fee_id`, `student_id`, `due_amount`, `status`, `due_date`) VALUES
-(3, 4, -4000.00, 'paid', '2025-10-02'),
-(4, 4, -3700.00, 'paid', '2025-09-29'),
-(5, 5, 100.00, 'unpaid', '2025-09-29'),
-(6, 4, 4000.00, 'unpaid', '2025-09-28'),
-(7, 4, 10.00, 'unpaid', '2025-09-28');
+(12, 4, 0.00, 'paid', '2025-10-01');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `inventory`
+--
+
+CREATE TABLE `inventory` (
+  `item_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `category` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `inventory`
+--
+
+INSERT INTO `inventory` (`item_id`, `name`, `quantity`, `category`) VALUES
+(4, 'Laptop', 5, 'Dean Office'),
+(8, 'Badminton ', 2, 'Sports Center'),
+(9, 'Java Books', 10, 'Reading Hall'),
+(11, 'chair', 4, 'Library Chair'),
+(12, 'Cricket Bats', 3, 'Sports Center');
 
 -- --------------------------------------------------------
 
@@ -209,9 +229,10 @@ CREATE TABLE `payments` (
 --
 
 INSERT INTO `payments` (`payment_id`, `student_id`, `amount`, `payment_date`, `receipt_no`) VALUES
-(6, 4, 5000.00, '2025-09-28', 'REC68d8358742ce2'),
 (7, 4, 200.00, '2025-09-28', 'REC68d83b6480814'),
-(8, 4, 4000.00, '2025-09-28', 'REC68d8ffbfeeab6');
+(9, 4, 10.00, '2025-10-01', 'REC68dd32e60f322'),
+(10, 4, 200.00, '2025-10-01', 'REC68dd34f85d0d3'),
+(16, 4, 100.00, '2025-10-01', 'REC68dd5dc290502');
 
 -- --------------------------------------------------------
 
@@ -314,6 +335,12 @@ ALTER TABLE `fees`
   ADD KEY `student_id` (`student_id`);
 
 --
+-- Indexes for table `inventory`
+--
+ALTER TABLE `inventory`
+  ADD PRIMARY KEY (`item_id`);
+
+--
 -- Indexes for table `materials`
 --
 ALTER TABLE `materials`
@@ -390,7 +417,13 @@ ALTER TABLE `attendance`
 -- AUTO_INCREMENT for table `fees`
 --
 ALTER TABLE `fees`
-  MODIFY `fee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `fee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `inventory`
+--
+ALTER TABLE `inventory`
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `materials`
@@ -414,7 +447,7 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `students`
